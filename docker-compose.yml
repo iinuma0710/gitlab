@@ -1,0 +1,18 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    hostname: gitlab.yukoweb.net
+    container_name: gitlab_container
+    restart: always
+    shm_size: '256m'
+    ports:
+      - "8080:80" # GitLab UI
+      - "2222:22" # Git over SSH
+    volumes:
+      - ./gitlab_config/gitlab.rb:/etc/gitlab/gitlab.rb
+      - gitlab-log:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+
+volumes:
+  gitlab-log:
+  gitlab-data:
